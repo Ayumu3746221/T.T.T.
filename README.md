@@ -3,6 +3,19 @@ Node.jsを動作環境としたTypescriptで動くMVCモデルのフレームワ
 
 ## Application Core
 
+```mermaid
+  flowchart LR
+    A[HTTP リクエスト] --> B[index.ts: App.listen]
+    B --> C[App コールバック]
+    C --> D[Router.handle(req, res)]
+    D --> E{routes に定義あり?}
+    E -- No --> F[404 レスポンス]
+    E -- Yes --> G[動的インポート]
+    G --> H[Controller インスタンス生成]
+    H --> I[controller.method() 実行]
+    I --> J[res.end(result)]
+```
+
 - **index.ts**
 
   - アプリケーション全体のエントリーポイント

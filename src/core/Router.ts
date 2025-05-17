@@ -14,6 +14,18 @@ export class Router {
     this.addRoute("GET", path, handler);
   }
 
+  post(path: string, handler: string) {
+    this.addRoute("POST", path, handler);
+  }
+
+  put(path: string, handler: string) {
+    this.addRoute("PUT", path, handler);
+  }
+
+  delete(path: string, handler: string) {
+    this.addRoute("DELETE", path, handler);
+  }
+
   private addRoute(method: string, path: string, handler: string) {
     const paramNames: string[] = [];
     const regexPath = path.replace(/:([^\/]+)/g, (_, key) => {

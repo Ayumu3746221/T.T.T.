@@ -6,6 +6,8 @@ export class App {
 
   constructor() {
     this.router.get("/", "HomeController@index");
+    this.router.get("/users", "UserController@index");
+    this.router.get("/users/1", "UserController@show");
   }
 
   listen(port: number) {

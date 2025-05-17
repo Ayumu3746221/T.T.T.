@@ -7,7 +7,7 @@ export class App {
   constructor() {
     this.router.get("/", "HomeController@index");
     this.router.get("/users", "UserController@index");
-    this.router.get("/users/1", "UserController@show");
+    this.router.get("/users/:id", "UserController@show");
   }
 
   listen(port: number) {

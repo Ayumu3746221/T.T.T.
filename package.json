@@ -1,0 +1,26 @@
+{
+  "name": "ts-nodejs-mvc-framework",
+  "version": "1.0.0",
+  "description": "Node.jsを動作環境としたTypescriptで動くMVCモデルのフレームワークです。",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node-dev src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ayumu3746221/TS-NodeJS-MVC-Framework.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ayumu3746221/TS-NodeJS-MVC-Framework/issues"
+  },
+  "homepage": "https://github.com/Ayumu3746221/TS-NodeJS-MVC-Framework#readme",
+  "devDependencies": {
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.8.3"
+  }
+}

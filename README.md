@@ -56,11 +56,29 @@ Node.jsを動作環境としたTypescriptで動くMVCモデルのフレームワ
 
 - **src/core/Router.ts**
 
+  - dynamic routingに対応するための変換
+
   ```ts
-    // ex: handker === "HomeController@index"
-    const [controllerName, methodName] = handler.split('@');
+    const regexPath = path.replace(/:([^\/]+)/g, (_, key) => {
+      paramNames.push(key);            // 例: 'id'
+      return '([^/]+)';                // 正規表現にする
+    });
   ```
 
-  1. route object：[key , value]
-    keyには"GET /"や"POST /users"等の文字列（method path）が代入される。
-    valueには"ControllerName@methodNameの文字列が代入される。
+  - paramNamesにパラメータを保持しておく
+
+  ```ts
+    route.paramNames.forEach((name, index) => {
+      params[name] = match[index + 1];
+    });
+  ```
+
+  - Controllerの実行
+
+  ```ts
+    const [controllerName, methodName] = route.controller.split('@');
+    const ControllerModule = await import(`../controllers/${controllerName}`);
+    const controller = new ControllerModule.default();
+
+    const result = await controller[methodName](params); // ← params渡す
+  ```

@@ -6,8 +6,8 @@ export default class UserController {
     return JSON.stringify(users, null, 2);
   }
 
-  async show(): Promise<string> {
-    const user = User.findById(1);
+  async show(params: { id: string }): Promise<string> {
+    const user = User.findById(Number(params.id));
     return JSON.stringify(user, null, 2);
   }
 }

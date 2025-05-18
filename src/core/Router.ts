@@ -1,5 +1,5 @@
-import * as http from "http";
 import { IncomingMessage, ServerResponse } from "http";
+import { parseBody } from "./parse/parseBody";
 
 type HandlerInfo = {
   pattern: RegExp;
@@ -54,14 +54,17 @@ export class Router {
           params[name] = match[index + 1];
         });
 
+        const body = await parseBody(req);
+        (req as any).body = body;
+
         const [controllerName, methodName] = route.controller.split("@");
         const ControllerModule = await import(
           `../controllers/${controllerName}`
         );
         const controller = new ControllerModule.default();
 
-        const result = await controller[methodName](params);
-        res.end(result);
+        const result = await controller[methodName](params, req, res);
+        if (!res.writableEnded) res.end(result);
         return;
       }
     }

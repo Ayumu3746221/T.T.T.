@@ -13,7 +13,8 @@ export default class UserController {
   }
 
   async create(params: any, req: IncomingMessage): Promise<string> {
-    return "Create user endpoint hit (POST)";
+    const body = (req as any).body;
+    return `Received new user with name: ${body.name}`;
   }
 
   async update(params: any, req: IncomingMessage): Promise<string> {
